@@ -13,6 +13,7 @@
 - [Anomaly Detection](#anomaly-detection)
 - [Optimization](#optimization)
 - [Visualization](#visualization)
+- [Installation](#installation)
 - [Snapshot](#snapshot)
 
 ## About The Project
@@ -86,8 +87,7 @@ To set up the project locally, follow these steps:
 1. **Clone the repository**
 
 ```sh
-   git clone https://github.com/your_username/SmartDrive.git
-   cd SmartDrive
+   git clone https://github.com/MohibSayed/Cobblestone-Energy-Research-Project.git
 ```
 
 2. **Install the required packages**
@@ -96,26 +96,21 @@ To set up the project locally, follow these steps:
  pip install -r requirements.txt
 ```
 
-3. **Install specific versions of the required libraries**
+3. **Run the application**
 
 ```sh
- pip install cv2==4.8.0
- pip install numpy
- pip install torch
- pip install opencv-python
- pip install opencv-contrib-python
- pip install ultralytics
- pip install cvzone
+ python main.py
 ```
 
-4. **Run the application**
+## Snapshot
 
-```sh
- python App.py
-```
+![demonstration_screenshot](https://github.com/user-attachments/assets/80bf35b8-f3b2-447f-a801-045e76fda341)
+<br/>
+![image](https://github.com/user-attachments/assets/2a08beb0-7a6a-4500-8d3b-9163f4c6b5b2)
 
 
-## Authors
+
+## Author
 
 - Mohib Abbas Sayed
   - [LinkedIn](https://www.linkedin.com/in/mohib-abbas-sayed-83837422a/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)

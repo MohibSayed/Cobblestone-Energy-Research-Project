@@ -66,8 +66,8 @@ The task is to develop a Python script capable of detecting anomalies in a conti
 ## Optimization
 
   - **We achieved optimization in following way:** <br/>
-    1. The code efficiently handles real-time data using a deque to maintain a sliding window for anomaly detection.<br/>
-    2. Yield-based data generation (yield t, value) ensures that memory is managed efficiently by generating data on the fly rather than storing it all at once.<br/>
+    1. The code efficiently handles real-time data using a `deque` to maintain a sliding window for anomaly detection.<br/>
+    2. Yield-based data generation (`yield t`, `value`) ensures that memory is managed efficiently by generating data on the fly rather than storing it all at once.<br/>
     3. Rolling mean and standard deviation calculations are done only within the sliding window, reducing unnecessary recalculations.
    
 

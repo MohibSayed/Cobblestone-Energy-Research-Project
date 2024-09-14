@@ -1,124 +1,84 @@
-# SmartDrive
+# CobbleStone Energy: Efficient Data Stream Anomaly Detection
 
 <br/>
 <p align="center">
   <img src="https://cobblestoneenergy.com/wp-content/uploads/2022/10/logo-updated.svg" width="20%" alt="logo"/>
 </p>
 
-<p align="center">
-  <a href="#table-of-contents"><b>Explore the docs »</b></a>
-  <br />
-  <br />
-  <a href="#architecture-and-design">Architecture</a>
-  &nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="#demonstration">Features</a>
-  &nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="#contributing">Local Setup</a>
-  <br />
-</p>
-
 ## Table Of Contents
 
 - [About the Project](#about-the-project)
-- [Architecture](#architecture)
-- [Demonstration & Features](#demonstration)
-- [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [Authors](#authors)
+- [Algorithm Selection](#algorithm-selection)
+- [Data Stream Simulation](#data-stream-simulation)
+- [Anomaly Detection](#anomaly-detection)
+- [Optimization](#optimization)
+- [Visualization](#visualization)
+- [Snapshot](#snapshot)
 
 ## About The Project
 
 **Problem Statement**
 
-Despite automotive technology advancements, global concern persists regarding driver safety due to increasing vehicle numbers, heightening accident risks. Our project aims to tackle this by:
+The task is to develop a Python script capable of detecting anomalies in a continuous data stream. This stream, simulating real-time sequences of floating-point numbers, could represent various metrics such as financial transactions or system metrics. Your focus will be on identifying unusual patterns, such as exceptionally high values or deviations from the norm.
 
-1. Calculating safe driving areas through analysis of roadway conditions.
-2. Developing precise lane boundary detection to prevent lane departures.
-3. Integrating safety features like Drowsiness, Seat Belt, and Smoking, Drinking and Occupancy Detection to monitor and mitigate driver risks.
-4. Providing solution at a sustainable cost for all the drivers.
+**Requirements**
 
-Through these initiatives, we aim to substantially reduce road accidents and enhance overall road safety.
+- The project must be implemented using Python 3.x.
+- Your code should be thoroughly documented, with comments to explain key sections.
+- Include a concise explanation of your chosen algorithm and its effectiveness.
+- Ensure robust error handling and data validation.
+- Limit the use of external libraries. If necessary, include a requirements.txt file.
 
 <br />
 
 **Features**
 
-1. Prioritizing measures and practices aimed for reducing risks and ensuring the well-being of drivers on the road. Enhancing safety through real-time insights and alerts for specific vehicle types.
-2. The project scope explicitly excludes integration of autonomous technology, emphasizing a focus solely on conventional driver-operated systems.
-3. The algorithmic solutions for this project are specifically tailored to address safe area calculation, lane detection, and driver behavior monitoring. Safe area calculation algorithms are designed to identify and analyze potential hazards within the driving environment.
-4. Aiming to promote responsible habits without involving hardware components in all vehicle types.
+1. Data Generation: The `data_stream` function simulates a time series with fluctuating values, incorporating seasonal patterns, noise, and sudden anomalies, ensuring non-negative output.
+2. Anomaly Detection: The `ZScoreAnomalyDetector` class identifies anomalies using a Z-score method, comparing current data against historical data within a sliding window.
+3. Real-time Plotting: The `live_plot` function uses Matplotlib to create a real-time plot of the data stream, with visual indicators for detected anomalies and adjustable y-axis limits.
+4. CSV Export: Anomalies detected are saved to a CSV file when a button is clicked, including time, value, mean, and deviation.
+5. Interactive Features: The plot includes a save button to export data and dynamically updates the plot limits based on data range to ensure readability.
 
-## Demonstration
 
-**Back Cam**
-<img src="./assets/Demo1.png" alt="demo">
-<br />
-**Front Cam**
-<img src="./assets/Demo2.jpg" alt="demo">
-<br />
+## Algorithm Selection
 
-## Architecture
+- **Chosen Algorithm: Z-Score Method** <br/>
+  The Z-score method is a simple yet effective statistical approach for anomaly detection, which measures how far a data point deviates from the mean in terms of standard deviations. It's particularly suitable for detecting anomalies when the data distribution follows a normal (Gaussian) distribution.
+  <br/>
+  The threshold-based approach (Z-score threshold of 3.0) provides a clear cutoff for detecting anomalies. <br/>
+  <br/>
+  Improvement Pointers:
+  Consider using more adaptive methods like Isolation Forest, LOF (Local Outlier Factor), or Autoencoders if data distribution becomes complex or non-Gaussian.
 
-The architecture:
+  
+## Data Stream Simulation
 
-<img src="./assets/block_diagram1.png" alt="architecture">
-<br />
-<img src="./assets/block_diagram2.png" alt="architecture">
-<br />
-<img src="./assets/block_diagram3.png" alt="architecture">
-<br />
+- **Chosen Method: `seasonal_pattern`, `noise`, `anomaly`** <br/>
+  Simulated time-series data with seasonal patterns, noise, and occasional random anomalies (spikes).
 
-## Algorithm
 
-1. Initialize and Load Models:
+## Anomaly Detection
 
-- Import required libraries and load pre-trained models for object detection, smoking, and drinking detection.
-- Load face and eye cascades for drowsiness detection.
+- **Z-Score-Based Detection** <br/>
+  A sliding window approach is used with deque to store recent values and calculate rolling statistics (mean and standard deviation).
 
-2. Video Capture and Frame Processing:
+## Optimization
 
-- Capture video frames from the input video.
-- Resize frames and limit the region of interest.
+  - **We achieved optimization in following way:** <br/>
+    1. The code efficiently handles real-time data using a deque to maintain a sliding window for anomaly detection.<br/>
+    2. Yield-based data generation (yield t, value) ensures that memory is managed efficiently by generating data on the fly rather than storing it all at once.<br/>
+    3. Rolling mean and standard deviation calculations are done only within the sliding window, reducing unnecessary recalculations.
+   
 
-3. Face and Seatbelt Detection:
+## Visualization
 
-- Detect faces and draw rectangles around them.
-- Use a pre-trained model to detect seatbelt usage and log the results.
-
-4. Smoking and Drinking Detection:
-
-- Apply smoking and drinking detection models on the frames.
-- Draw bounding boxes and labels for detected objects.
-
-5. Drowsiness Detection:
-
-- Detect eyes within the face regions.
-- Log and label the frames if no eyes are detected (indicating drowsiness).
-
-6. Display Results:
-
-- Draw a dashboard on the frames to display the status of smoking, drinking, seatbelt usage, drowsiness, and face count.
-- Show the video feed with the drawn information.
-
-6. Log and Post-Processing:
-
-- Log activities such as face count, smoking, drinking, seatbelt usage, and drowsiness.
-- Read the log file and generate a report summarizing the detections and their counts.
-
-7. Clean Up:
-
-- Release video capture and close all OpenCV windows after processing.
-
-<br />
-<br />
-
-### Technologies Used
-
-- Computer Vision
-- YOLO
-
-<br />
-
+- **Real-time Plotting** <br/>
+  The live plot shows the data stream in real time, with anomalies highlighted using red markers, providing an immediate visual representation of detected outliers.
+- **Interactive Features**<br/>
+    1. Save to CSV Button: Anomalies can be saved to a CSV file when the "Save as CSV" button is clicked, providing an interactive way to record results for future analysis.
+    2. Dynamic Plot Limits: The y-axis range adapts dynamically to the data range to ensure the plot remains readable.
+ 
+  
 ## Installation
 
 To set up the project locally, follow these steps:
@@ -154,41 +114,8 @@ To set up the project locally, follow these steps:
  python App.py
 ```
 
-## Contributing
-
-**Local Setup || Project Structure**
-
-NOTE: Individual instructions can be found in respective directories.
-
-```
-*
-├───Module 1 - BackCam
-├───Module 2.1 - FrontCam
-├───Module 2.2 - FrontCam
-├───Module 2.3 - FrontCam
-├───Module 2.4 - FrontCam
-├───Module 2.5 - FrontCam
-├───Safe-lane-detection
-└───App.py
-```
-
-- `Module 1 - BackCam`: Safe lane detection.
-- `Module 2.1 - FrontCam`: Drinking detection.
-- `Module 2.2 - FrontCam`: Drowsiness detection.
-- `Module 2.3 - FrontCam`: Smoking detection.
-- `Module 2.4 - FrontCam`: Seatbelt detection.
-- `Module 2.5 - FrontCam`: Occupancy detection.
-
-<br />
-<br />
-
-
 
 ## Authors
 
-- Hamza Sayyed
-  - [LinkedIn](https://shorturl.at/hjAEI)
-- Om Shete
-  - [LinkedIn](https://www.linkedin.com/in/om-shete-25748522a/)
 - Mohib Abbas Sayed
   - [LinkedIn](https://www.linkedin.com/in/mohib-abbas-sayed-83837422a/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)

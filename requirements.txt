@@ -1,0 +1,4 @@
+# NumPy: For generating noise and computing numbers.
+# Matplotlib: For plotting and visualizing the data stream and detected anomalies in real-time.
+# Scipy: Mentioned in the dependencies but not explicitly used in the provided code. It typically offers additional functions for scientific computations, but it's not needed for the current implementation.
+# CSV: For saving detected anomalies to a CSV file, though it's a built-in Python library rather than an external one.
